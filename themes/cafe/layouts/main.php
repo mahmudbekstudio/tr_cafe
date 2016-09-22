@@ -20,6 +20,39 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <?php
+    $css = array(
+        //'css/bootstrap.min.css',
+        'font-awesome/css/font-awesome.css',
+        'css/plugins/blueimp/css/blueimp-gallery.min.css',
+        'css/plugins/iCheck/custom.css',
+        'css/animate.css',
+        'css/plugins/toastr/toastr.min.css',
+        'css/style.css',
+        'css/custom.css',
+    );
+    $js = array(
+        'js/plugins/fullcalendar/moment.min.js',
+        //'js/jquery-2.1.1.js',
+        'js/jquery-ui-1.10.4.min.js',
+        'js/bootstrap.min.js',
+        'js/plugins/metisMenu/jquery.metisMenu.js',
+        'js/plugins/slimscroll/jquery.slimscroll.min.js',
+        'js/jquery.cookie.js',
+        'js/jquery-ui.custom.min.js',
+        'js/plugins/iCheck/icheck.min.js',
+        'js/inspinia.js',
+        'js/plugins/pace/pace.min.js',
+        'js/extends.js',
+        'js/scripts.js',
+    );
+    $baseUrl = Yii::$app->urlManager->baseUrl . '/';
+
+    $cssCount = count($css);
+    for($i = 0; $i < $cssCount; $i++) {
+        echo "<link href=\"" . $baseUrl . $css[$i] . "\" rel=\"stylesheet\">\n";
+    }
+    ?>
 </head>
 <body class="<?php echo (isset($this->params['bodyClass']) ? $this->params['bodyClass'] : ''); ?>">
 <?php $this->beginBody() ?>
@@ -82,7 +115,12 @@ AppAsset::register($this);
     </div>
 </footer>*/ ?>
 
-<?php $this->endBody() ?>
+<?php $this->endBody();
+$jsCount = count($js);
+for($i = 0; $i < $jsCount; $i++) {
+    echo "<script src=\"" . $baseUrl . $js[$i] . "\"></script>\n";
+}
+?>
 </body>
 </html>
 <?php $this->endPage() ?>
