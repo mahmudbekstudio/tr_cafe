@@ -25,7 +25,7 @@ $this->params['bodyClass'] = 'dashboard';
                         <span class="m-r-sm text-muted welcome-message"><?php
                             $user = Yii::$app->user->getIdentity();
                             echo $user->firstname . ' ' . $user->lastname;
-                            ?> (<a href="#" class="send-all-baskets"><span class="all-baskets-count">0</span> x <i class="fa fa-refresh fa-spin fa-1x fa-fw"></i></a>)</span>
+                            ?> (<a href="#" class="send-all-baskets"><span class="all-baskets-count">0</span> x <i class="fa fa-refresh fa-1x fa-fw"></i></a>)</span>
                     </li>
                     <?php /*<li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">

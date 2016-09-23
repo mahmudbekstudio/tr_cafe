@@ -454,6 +454,15 @@ $(document).ready(function () {
 		.on('click', '.open-return-basket-goods-send', function() {
 			$('#returnPopup').modal('show');
 			return false;
+		})
+		.on('click', '.send-all-baskets', function() {
+			var refreshIcon = $('.send-all-baskets').find('.fa-refresh');
+			refreshIcon.addClass('fa-spin');
+			sendRequest(function() {
+				refreshIcon.removeClass('fa-spin');
+				initRequestBasket();
+			});
+			return false;
 		});
 
 	$('#payPopup').on('hidden.bs.modal', function (e) {
@@ -507,11 +516,38 @@ $(document).ready(function () {
 
 		$('#payPopup').modal('hide');
 
-		sendRequest();
+		initRequestBasket();
 	};
 
-	var sendRequest = function() {
+	setInterval(function() {
 		var requestBasket = getRequestBasket();
+		var sendBtn = $('.send-all-baskets');
+
+		if(requestBasket.length >= 10) {
+			sendBtn.trigger('click');
+		} else if(requestBasket.length) {
+			var dTime = Math.round((new Date()).getTime() / 1000) - 300000;
+
+			if(dTime > requestBasket[0].date) {
+				sendBtn.trigger('click');
+			}
+		}
+	}, 300000);//5 minute = 300000
+
+	var initRequestBasket = function() {
+		var requestBasket = getRequestBasket();
+		$('.all-baskets-count').text(requestBasket.length);
+	};
+
+	var sendRequest = function(callback) {
+		var requestBasket = getRequestBasket();
+
+		if(!requestBasket.length) {
+			if(typeof callback == 'function') {
+				callback();
+			}
+			return false;
+		}
 
 		var xhr = $.ajax({
 			type: 'post',
@@ -531,6 +567,10 @@ $(document).ready(function () {
 						requestBasket = newRequestBasketList;
 						setRequestBasket(newRequestBasketList);
 					}
+				}
+
+				if(typeof callback == 'function') {
+					callback();
 				}
 			},
 			//error: this.error,
@@ -1106,4 +1146,5 @@ $(document).ready(function () {
 	initBasket();
 	initSavedBasket();
 	initReturnBasket(false);
+	initRequestBasket();
 });
