@@ -85,9 +85,8 @@ $(document).ready(function () {
 						goodsItem.trigger('click');
 						$element.val('');
 					} else {
-						//addToBasketItem(id, count)
 						$element.val(code);
-						$element.siblings('.barcode-scan-count').focus();
+						$element.siblings('.barcode-scan-count').val('1').prop('readonly', false).focus();
 					}
 				}
 			}
@@ -97,19 +96,73 @@ $(document).ready(function () {
 	$(document)
 		.on('click', '.barcode-scan-count', function() {
 			var inp = $(this);
-			var isReadonly = !inp.prop('readonly');
+			var isReadonly = !inp.hasClass('disabled');
 
-			inp.prop('readonly', isReadonly);
+			if(isReadonly) {
+				inp.addClass('disabled').blur();
+			} else {
+				inp.removeClass('disabled');
+			}
+
 			setSettings('scannerIsReadOnly', isReadonly);
 		})
-		.on('keyup', '.barcode-scan-count', function(e) {
-			var code = parseInt(e.keyCode);
-			var codeArr = {
-				96: '0', 97: '1', 98: '2', 99: '3', 100: '4', 101: '5', 102: '6', 103: '7', 104: '8', 105: '9',
-				48: '0', 49: '1', 50: '2', 51: '3', 52: '4', 53: '5', 54: '6', 55: '7', 56: '8', 57: '9'
-			};
+		.on('keydown', '.barcode-scan', function(e) {
+			var keycode = (e.which) ? e.which : e.keyCode;
+			var result = false;
 
-			//TODO: check if not number remove char
+			if ((keycode >= 96 && keycode <= 105) ||
+				(keycode >= 48 && keycode <= 57) ||
+				keycode == 13 || keycode == 8 || keycode == 46
+			) {
+				result = true;
+
+				if(keycode == 13) {
+					var inp = $(this);
+					var isReadonly = getSettings('scannerIsReadOnly');
+					var barcode = inp.val();
+					var goodsItem = $('.goods-item[data-code="' + barcode + '"]');
+
+					if(!goodsItem.length) {
+						alert('Goods Not found with code "' + barcode + '"');
+						inp.val('');
+						return false;
+					}
+
+					if(isReadonly) {
+						inp.val('');
+						goodsItem.trigger('click');
+					} else {
+						inp.siblings('.barcode-scan-count').val('1').prop('readonly', false).focus();
+					}
+				}
+			}
+
+			return result;
+		})
+		.on('keydown', '.barcode-scan-count', function(e) {
+			var keycode = (e.which) ? e.which : e.keyCode;
+			var result = false;
+
+			if ((keycode >= 96 && keycode <= 105) ||
+				(keycode >= 48 && keycode <= 57) ||
+				keycode == 13 || keycode == 8 || keycode == 46
+			) {
+				result = true;
+
+				if(keycode == 13) {
+					var inp = $(this);
+					var count = inp.val();
+					var barCodeScanInp = $('.barcode-scan')
+					var barCode = barCodeScanInp.val();
+					var goodsItemId = $('.goods-item[data-code="' + barCode + '"]').attr('data-id');
+
+					addToBasket(goodsItemId, count);
+					barCodeScanInp.val('');
+					inp.val('1').prop('readonly', true).blur();
+				}
+			}
+
+			return result;
 		})
 		.on('blur', '.barcode-scan-count', function(e) {
 			$(this).val(1);
@@ -830,8 +883,10 @@ $(document).ready(function () {
 		calcReturnTotalPrice();
 	};
 
-	var addToBasket = function(id) {
+	var addToBasket = function(id, count) {
 		var isReturnBasket = getSettings('isReturnBasket');
+		count = count || 1;
+		count = parseInt(count);
 		if(isReturnBasket) {
 			addToReturnBasket(id);
 			return false;
@@ -840,9 +895,9 @@ $(document).ready(function () {
 		var goodsCount = getBasketCookie(id);
 
 		if(!goodsCount) {
-			goodsCount = 1;
+			goodsCount = count;
 		} else {
-			goodsCount++;
+			goodsCount += count;
 		}
 
 		addToBasketItem(id, goodsCount);
@@ -1190,10 +1245,16 @@ $(document).ready(function () {
 	};
 
 	var initScannerCode = function() {
+		var inp = $('.barcode-scan-count');
 		var isReadonly = getSettings('scannerIsReadOnly');
 		isReadonly = isReadonly || false;
 
-		$('.barcode-scan-count').prop('readonly', isReadonly);
+		if(isReadonly) {
+			inp.addClass('disabled');
+		} else {
+			inp.removeClass('disabled');
+		}
+
 		setSettings('scannerIsReadOnly', isReadonly);
 	};
 

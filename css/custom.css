@@ -486,7 +486,14 @@
 
 .barcode-scan-count {
 	width: 60px;
-	cursor: pointer;
+	cursor: pointer !important;
+	border: 1px solid #1ab394 !important;
+	background-color: #FFF !important;
+}
+
+.barcode-scan-count.disabled {
+	border: 1px solid #e5e6e7 !important;
+	background-color: #eee !important;
 }
 
 .barcode-scan {
