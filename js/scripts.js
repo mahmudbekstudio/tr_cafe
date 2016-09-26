@@ -69,7 +69,48 @@ $(document).ready(function () {
 		$(this).tab('show')
 	});
 
+	$('#barcode-scan').codeScanner({
+		onScan: function ($element, code) {
+			if(code != '0') {
+				var goodsItem = $('.goods-item[data-code="' + code + '"]');
+
+				if(!goodsItem.length) {
+					alert('Goods Not found with code "' + code + '"');
+				} else {
+					var isReadonly = getSettings('scannerIsReadOnly');
+
+					if(isReadonly) {
+						goodsItem.trigger('click');
+						$element.val('');
+					} else {
+						//addToBasketItem(id, count)
+						$element.siblings('.barcode-scan-count').focus();
+					}
+				}
+			}
+		}
+	});
+
 	$(document)
+		.on('click', '.barcode-scan-count', function() {
+			var inp = $(this);
+			var isReadonly = !inp.prop('readonly');
+
+			inp.prop('readonly', isReadonly);
+			setSettings('scannerIsReadOnly', isReadonly);
+		})
+		.on('keyup', '.barcode-scan-count', function(e) {
+			var code = parseInt(e.keyCode);
+			var codeArr = {
+				96: '0', 97: '1', 98: '2', 99: '3', 100: '4', 101: '5', 102: '6', 103: '7', 104: '8', 105: '9',
+				48: '0', 49: '1', 50: '2', 51: '3', 52: '4', 53: '5', 54: '6', 55: '7', 56: '8', 57: '9'
+			};
+
+			//TODO: check if not number remove char
+		})
+		.on('blur', '.barcode-scan-count', function(e) {
+			$(this).val(1);
+		})
 		.on('click', '.goods-item', function() {
 			var goods = $(this);
 			var id = goods.attr('data-id');
@@ -801,6 +842,10 @@ $(document).ready(function () {
 			goodsCount++;
 		}
 
+		addToBasketItem(id, goodsCount);
+	};
+
+	var addToBasketItem = function(id, goodsCount) {
 		setBasketCookie(id, goodsCount);
 
 		drawItem(id, goodsCount);
@@ -1141,10 +1186,19 @@ $(document).ready(function () {
 		return settingsList[setting];
 	};
 
+	var initScannerCode = function() {
+		var isReadonly = getSettings('scannerIsReadOnly');
+		isReadonly = isReadonly || false;
+
+		$('.barcode-scan-count').prop('readonly', isReadonly);
+		setSettings('scannerIsReadOnly', isReadonly);
+	};
+
 
 
 	initBasket();
 	initSavedBasket();
 	initReturnBasket(false);
 	initRequestBasket();
+	initScannerCode();
 });

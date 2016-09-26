@@ -21,6 +21,10 @@ $this->params['bodyClass'] = 'dashboard';
                     </form>
                 </div>*/ ?>
                 <ul class="nav navbar-top-links navbar-right">
+                    <li class="barcode-scan-wrapper">
+                        <input type="text" id="barcode-scan" class="form-control barcode-scan" />
+                        <input type="text" class="form-control barcode-scan-count" readonly="readonly" value="1" />
+                    </li>
                     <li>
                         <span class="m-r-sm text-muted welcome-message"><?php
                             $user = Yii::$app->user->getIdentity();
@@ -344,7 +348,7 @@ $this->params['bodyClass'] = 'dashboard';
                                                             continue;
                                                         ?>
                                                         <div class="col-sm-4">
-                                                            <a href="#" class="goods-item" data-id="<?php echo $val['id'] ?>" data-name="<?php echo $val['name'] ?>" data-price="<?php echo $val['sell_price'] ?>" data-image="<?php echo Yii::$app->urlManager->baseUrl; ?>/<?php echo $val['pic'] ?>">
+                                                            <a href="#" class="goods-item" data-id="<?php echo $val['id'] ?>" data-name="<?php echo $val['name'] ?>" data-code="<?php echo $val['code'] ?>" data-price="<?php echo $val['sell_price'] ?>" data-image="<?php echo Yii::$app->urlManager->baseUrl; ?>/<?php echo $val['pic'] ?>">
                                                                 <div class="thumbnail">
                                                                     <img style="background-image: url('<?php echo Yii::$app->urlManager->baseUrl; ?>/<?php echo $val['pic'] ?>')" src="<?php echo Yii::$app->urlManager->baseUrl; ?>/img/thumb-image.png" alt="<?php echo $val['name'] ?>" class="img-responsive" title="<?php echo $val['name'] ?>">
                                                                     <div class="caption">

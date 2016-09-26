@@ -43,6 +43,7 @@ AppAsset::register($this);
         'js/plugins/iCheck/icheck.min.js',
         'js/inspinia.js',
         'js/plugins/pace/pace.min.js',
+        'js/jquery-code-scanner.js',
         'js/extends.js',
         'js/scripts.js',
     );
