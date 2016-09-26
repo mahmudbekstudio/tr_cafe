@@ -72,6 +72,7 @@ $(document).ready(function () {
 	$('#barcode-scan').codeScanner({
 		onScan: function ($element, code) {
 			$element.val(code);
+			console.log(code);
 			if(code != '0') {
 				var goodsItem = $('.goods-item[data-code="' + code + '"]');
 
