@@ -496,6 +496,10 @@
 	background-color: #eee !important;
 }
 
+.barcode-scan-container {
+	margin-top: 3px;
+}
+
 .barcode-scan {
 	width: 150px;
 }

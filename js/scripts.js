@@ -49,18 +49,25 @@ $(document).ready(function () {
 
 	$(document).on('keydown', function(e) {
 		var code = parseInt(e.keyCode);
-		var codeArr = {
-			96: '0', 97: '1', 98: '2', 99: '3', 100: '4', 101: '5', 102: '6', 103: '7', 104: '8', 105: '9',
-			48: '0', 49: '1', 50: '2', 51: '3', 52: '4', 53: '5', 54: '6', 55: '7', 56: '8', 57: '9'
-		};
+		var loginForm = $('#login-form');
+		if(loginForm.length) {
+			var codeArr = {
+				96: '0', 97: '1', 98: '2', 99: '3', 100: '4', 101: '5', 102: '6', 103: '7', 104: '8', 105: '9',
+				48: '0', 49: '1', 50: '2', 51: '3', 52: '4', 53: '5', 54: '6', 55: '7', 56: '8', 57: '9'
+			};
 
-		if(code == 13) {
-			$('.keybaord-btn-item[data-val="login"]').trigger('click');
-		} else if(code == 8) {
-			$('.keybaord-btn-item[data-val="del"]').trigger('click');
-			return false;
-		} else if((code >= 96 && code <= 105) || (code >= 48 && code <= 57)) {
-			$('.keybaord-btn-item[data-val="' + codeArr[code] + '"]').trigger('click');
+			if(code == 13) {
+				$('.keybaord-btn-item[data-val="login"]').trigger('click');
+			} else if(code == 8) {
+				$('.keybaord-btn-item[data-val="del"]').trigger('click');
+				return false;
+			} else if((code >= 96 && code <= 105) || (code >= 48 && code <= 57)) {
+				$('.keybaord-btn-item[data-val="' + codeArr[code] + '"]').trigger('click');
+			}
+		} else if(code == 123) {
+			$('.barcode-scan-count').trigger('click');
+		} else if(code == 122) {
+			$('.barcode-scan').focus();
 		}
 	});
 
@@ -86,7 +93,7 @@ $(document).ready(function () {
 						$element.val('');
 					} else {
 						$element.val(code);
-						$element.siblings('.barcode-scan-count').val('1').prop('readonly', false).focus();
+						$element.siblings('.barcode-scan-count').val('1').prop('readonly', false).focus().select();
 					}
 				}
 			}
@@ -132,7 +139,7 @@ $(document).ready(function () {
 						inp.val('');
 						goodsItem.trigger('click');
 					} else {
-						inp.siblings('.barcode-scan-count').val('1').prop('readonly', false).focus();
+						inp.siblings('.barcode-scan-count').val('1').prop('readonly', false).focus().select();
 					}
 				}
 			}
@@ -145,7 +152,7 @@ $(document).ready(function () {
 
 			if ((keycode >= 96 && keycode <= 105) ||
 				(keycode >= 48 && keycode <= 57) ||
-				keycode == 13 || keycode == 8 || keycode == 46
+				keycode == 13 || keycode == 8 || keycode == 46 || keycode == 37 || keycode == 39
 			) {
 				result = true;
 
