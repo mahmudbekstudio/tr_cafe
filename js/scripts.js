@@ -65,14 +65,14 @@ $(document).ready(function () {
 	});
 
 	$('#myTabs a').click(function (e) {
-		e.preventDefault()
+		e.preventDefault();
 		$(this).tab('show')
 	});
 
 	$('#barcode-scan').codeScanner({
+		minEntryChars: 8,
+		maxEntryTime: 500,
 		onScan: function ($element, code) {
-			$element.val(code);
-			console.log(code);
 			if(code != '0') {
 				var goodsItem = $('.goods-item[data-code="' + code + '"]');
 
@@ -86,6 +86,7 @@ $(document).ready(function () {
 						$element.val('');
 					} else {
 						//addToBasketItem(id, count)
+						$element.val(code);
 						$element.siblings('.barcode-scan-count').focus();
 					}
 				}
