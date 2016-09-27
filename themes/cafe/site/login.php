@@ -41,6 +41,7 @@ $this->params['bodyClass'] = 'gray-bg';
                 <div class="col-md-4"><?= Html::submitButton('<i class="fa fa-sign-in" aria-hidden="true"></i>', ['disabled' => 'disabled', 'class' => 'keybaord-btn-item btn btn-primary  dim btn-large-dim', 'data-val' => 'login', 'name' => 'login-button']) ?></div>
             </div>
             <?php ActiveForm::end(); ?>
+            <p class="text-center"><a href="#" class="exit-system">Exit</a></p>
         </div>
     </div>
 <?php /*<div class="site-login">
