@@ -30,7 +30,7 @@ $this->params['bodyClass'] = 'dashboard';
                     <div class="col-sm-3">
                         <ul class="nav navbar-top-links navbar-left barcode-scan-container">
                             <li class="barcode-scan-wrapper">
-                                <input type="text" id="barcode-scan" class="form-control barcode-scan" />
+                                <input type="text" id="barcode-scan" placeholder="Barcode" class="form-control barcode-scan" />
                                 <input type="text" class="form-control barcode-scan-count" readonly="readonly" value="1" />
                             </li>
                         </ul>
