@@ -162,6 +162,52 @@ $(document).ready(function () {
 	});
 
 	$(document)
+		.on('keyup', function(e) {
+			if(!$(e.target).is(':input')) {
+				var keycode = (e.which) ? e.which : e.keyCode;
+				var list = $('.custom-basket-table-body-list');
+				var activeRow = list.find('.active-tr-row');
+				//var action = '';
+
+				if(keycode == 38 || keycode == 104) {
+					//action = 'up';
+					var prevItem = activeRow.prev();
+
+					if(prevItem.length) {
+						prevItem.trigger('click');
+					}
+				} else if(keycode == 40 || keycode == 98) {
+					//action = 'down';
+					var prevItem = activeRow.next();
+
+					if(prevItem.length) {
+						prevItem.trigger('click');
+					}
+				} else if(keycode == 37 || keycode == 100) {
+					//action = 'left';
+				} else if(keycode == 39 || keycode == 102) {
+					//action = 'right';
+				} else if(keycode == 46 || keycode == 110) {
+					//action = 'delete';
+					activeRow.find('.custom-basket-table-td-action').find('.basket-goods-item-remove').trigger('click');
+				} else if(keycode == 107 || keycode == 61) {
+					//action = 'plus';
+					activeRow.find('.goods-count').find('.basket-goods-add').trigger('click');
+				} else if(keycode == 109 || keycode == 173) {
+					//action = 'minus';
+					activeRow.find('.goods-count').find('.basket-goods-remove').trigger('click');
+				}
+			}
+		})
+		.on('click', '.custom-basket-table-body-list .custom-basket-table-tr', function() {
+			var row = $(this);
+
+			row.siblings('.active-tr-row').removeClass('active-tr-row');
+
+			if(!row.hasClass('active-tr-row')) {
+				row.addClass('active-tr-row');
+			}
+		})
 		.on('click', '.barcode-scan-count', function() {
 			var inp = $(this);
 			var isReadonly = !inp.hasClass('disabled');
@@ -233,12 +279,16 @@ $(document).ready(function () {
 			return result;
 		})
 		.on('blur', '.barcode-scan-count', function(e) {
-			$(this).val(1);
+			$(this).val(1).siblings('.barcode-scan').focus();
 		})
 		.on('click', '.goods-item', function() {
 			var goods = $(this);
 			var id = goods.attr('data-id');
+			var list = $('.custom-basket-table-body-list');
+
 			addToBasket(id);
+			list.find('.active-tr-row').removeClass('active-tr-row');
+			list.find('.custom-basket-table-tr[data-goods-id="' + id + '"]').addClass('active-tr-row');
 
 			return false;
 		})
