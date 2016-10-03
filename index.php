@@ -6,6 +6,10 @@ defined('YII_ENV') or define('YII_ENV', 'prod');
 
 define('COMPANY_THEME', 'cafe');// change when install
 define('COMPANY_DB', 'trading-test');// change when install
+define('COMPANY_DBHOST', 'localhost');// change when install
+define('COMPANY_DBUSER', 'root');// change when install
+define('COMPANY_DBPASS', '');// change when install
+define('COMPANY_DBTABLEPREFIX', 'trade_');// change when install
 
 $rootDir = __DIR__ . '/../core/';// change when install
 
