@@ -4,6 +4,8 @@
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 defined('YII_ENV') or define('YII_ENV', 'prod');
 
+define('COMPANY_THEME', 'cafe');
+
 $rootDir = __DIR__ . '/../core/';
 
 require($rootDir . 'vendor/autoload.php');
