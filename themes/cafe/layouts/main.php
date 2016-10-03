@@ -45,6 +45,7 @@ AppAsset::register($this);
         'js/plugins/pace/pace.min.js',
         'js/jquery-code-scanner.js',
         'js/extends.js',
+        'js/jquery.browser.min.js',
         'js/scripts.js',
     );
     $baseUrl = Yii::$app->urlManager->baseUrl . '/';

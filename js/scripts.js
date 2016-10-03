@@ -1,4 +1,8 @@
 $(document).ready(function () {
+	if(!$.browser.desktop) {
+		$('.barcode-scan-wrapper').addClass('hidden');
+	}
+
 	var keyBoardItem = $('.keyboard-inp').find('.keybaord-inp-item');
 	var keyBoardItemCount = keyBoardItem.length;
 	var loginInp = $('#loginform-password');
