@@ -7,7 +7,7 @@ defined('YII_ENV') or define('YII_ENV', 'prod');
 define('COMPANY_THEME', 'cafe');// change when install
 define('COMPANY_DB', 'trading-test');// change when install
 
-$rootDir = __DIR__ . '/../core/';
+$rootDir = __DIR__ . '/../core/';// change when install
 
 require($rootDir . 'vendor/autoload.php');
 require($rootDir . 'vendor/yiisoft/yii2/Yii.php');
