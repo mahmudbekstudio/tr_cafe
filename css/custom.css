@@ -246,6 +246,10 @@
 	padding: 10px;
 }
 
+.dashboard .navbar-top-links {
+	white-space: nowrap;
+}
+
 .dashboard .navbar {
 	min-height: 30px;
 }
