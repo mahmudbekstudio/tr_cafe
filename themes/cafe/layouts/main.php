@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <?php $this->head() ?>
     <?php
     $css = array(
