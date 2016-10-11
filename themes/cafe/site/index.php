@@ -22,21 +22,12 @@ $this->params['bodyClass'] = 'dashboard';
                 </div>*/ ?>
                 <div class="row">
                     <div class="col-sm-3">
-                        <!--Name of company-->
-                    </div>
-                    <div class="col-sm-3">
-                        <!---->
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="nav navbar-top-links navbar-left barcode-scan-container">
-                            <li class="barcode-scan-wrapper">
-                                <input type="text" id="barcode-scan" placeholder="Barcode" class="form-control barcode-scan" />
-                                <input type="text" class="form-control barcode-scan-count" readonly="readonly" value="1" />
+                        <ul class="nav navbar-top-links navbar-left">
+                            <li>
+                                <a href="<?php echo Url::to('site/logout') ?>">
+                                    <i class="fa fa-sign-out"></i> Выйти
+                                </a>
                             </li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="nav navbar-top-links navbar-right">
                             <li>
                         <span class="m-r-sm text-muted welcome-message"><?php
                             $user = Yii::$app->user->getIdentity();
@@ -140,12 +131,22 @@ $this->params['bodyClass'] = 'dashboard';
                                     </li>*/ ?>
 
 
-                            <li>
-                                <a href="<?php echo Url::to('site/logout') ?>">
-                                    <i class="fa fa-sign-out"></i> Выйти
-                                </a>
+
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <!---->
+                    </div>
+                    <div class="col-sm-3">
+                        <ul class="nav navbar-top-links navbar-left barcode-scan-container">
+                            <li class="barcode-scan-wrapper">
+                                <input type="text" id="barcode-scan" placeholder="Barcode" class="form-control barcode-scan" />
+                                <input type="text" class="form-control barcode-scan-count" readonly="readonly" value="1" />
                             </li>
                         </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <!--Name of company-->
                     </div>
                 </div>
             </nav>
