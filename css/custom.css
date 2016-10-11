@@ -480,6 +480,11 @@
 	text-align: left;
 }
 
+.vip-users-list .vip-user-item {
+	padding: 12px;
+	font-size: 18px;
+}
+
 .saved-basket-goods-note,
 .saved-basket-goods-note:hover,
 .saved-basket-goods-note:focus,
