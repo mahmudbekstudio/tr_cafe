@@ -751,7 +751,7 @@ $(document).ready(function () {
 				sendBtn.trigger('click');
 			}
 		}
-	}, 300000);//5 minute = 300000
+	}, 60000);//5 minute = 300000
 
 	var initRequestBasket = function() {
 		var requestBasket = getRequestBasket();
