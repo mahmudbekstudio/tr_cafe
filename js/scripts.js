@@ -662,7 +662,7 @@ $(document).ready(function () {
 
 			requestBasket.push(basket);
 			setRequestBasket(requestBasket);
-			sendRequest();
+			initRequestBasket();
 
 			clearReturnBasket();
 			$('.return-basket-note-text').val('');
@@ -791,11 +791,30 @@ $(document).ready(function () {
 				if(typeof callback == 'function') {
 					callback();
 				}
+
+				checkRequestBasket();
 			},
 			//error: this.error,
 			dataType: 'json',
 			async: true
 		});
+	};
+
+	var checkRequestBasket = function() {
+		var requestBasket = getRequestBasket();
+		var newRequestBasketList = [];
+
+		for(var val in requestBasket) {
+			if(
+				typeof requestBasket[val]['userId'] !== 'undefined' &&
+				typeof requestBasket[val]['date'] !== 'undefined' &&
+				typeof requestBasket[val]['basket'] !== 'undefined'
+			) {
+				newRequestBasketList.push(requestBasket[val]);
+			}
+		}
+
+		setRequestBasket(newRequestBasketList);
 	};
 
 	var clickPayButton = function(saved) {

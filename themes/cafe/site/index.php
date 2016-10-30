@@ -358,17 +358,17 @@ $this->params['bodyClass'] = 'dashboard';
                                                 <div class="row">
                                                     <?php
                                                     foreach($goodsList as $val) :
-                                                        if($val['category_id'] != $item['id'])
+                                                        if(!in_array($item['id'], $val['category']))
                                                             continue;
                                                         ?>
                                                         <div class="col-sm-4">
-                                                            <a href="#" class="goods-item" data-id="<?php echo $val['id'] ?>" data-name="<?php echo $val['name'] ?>" data-code="<?php echo $val['code'] ?>" data-price="<?php echo $val['sell_price'] ?>" data-image="<?php echo Yii::$app->urlManager->baseUrl; ?>/<?php echo $val['pic'] ?>">
+                                                            <a href="#" class="goods-item" data-id="<?php echo $val['id'] ?>" data-name="<?php echo $val['name'] ?>" data-code="<?php echo $val['code'] ?>" data-price="<?php echo $val['price'] ?>" data-image="<?php echo Yii::$app->urlManager->baseUrl; ?>/<?php echo $val['pic'] ?>">
                                                                 <div class="thumbnail">
                                                                     <img style="background-image: url('<?php echo Yii::$app->urlManager->baseUrl; ?>/<?php echo $val['pic'] ?>')" src="<?php echo Yii::$app->urlManager->baseUrl; ?>/img/thumb-image.png" alt="<?php echo $val['name'] ?>" class="img-responsive" title="<?php echo $val['name'] ?>">
                                                                     <div class="caption">
                                                                         <strong class="goods-item-title" title="<?php echo $val['name'] ?>"><?php echo $val['name'] ?></strong>
-                                                                        <span class="price"><?php echo number_format($val['sell_price'], 0, ',', ' ') ?></span>
-                                                                        <span class="price-shadow"><?php echo number_format($val['sell_price'], 0, ',', ' ') ?></span>
+                                                                        <span class="price"><?php echo number_format($val['price'], 0, ',', ' ') ?></span>
+                                                                        <span class="price-shadow"><?php echo number_format($val['price'], 0, ',', ' ') ?></span>
                                                                     </div>
                                                                 </div>
                                                             </a>
